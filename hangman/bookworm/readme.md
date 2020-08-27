@@ -1,1 +1,0 @@
-Bookworm Adventures tile solver
