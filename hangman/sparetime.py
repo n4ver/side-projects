@@ -7,10 +7,11 @@ class Hangman:
         self.wrong_guesses = 5
 
         
-    def screen(self, word, placeholder, guesses):
+    def screen(self, placeholder, guesses):
         print(placeholder)
         print()
-        print(f"Guessed Letters: {guesses}") # Clean up
+        print("Wrong Guesses: ", end='') # Clean up
+        print(*guesses, sep=", ")
 
 
     def wordlist(self, path):
@@ -49,10 +50,10 @@ class Hangman:
 
 
     def round(self, word, placeholder, guesses):
-        self.screen(word, placeholder, guesses)
+        self.screen(placeholder, guesses)
         guess = input("Give a guess: ")
-        while not guess.isalpha() or len(guess) != 1:
-            guess = input("Give a guess (a letter this time): ")
+        while not guess.isalpha() or len(guess) != 1 or guess in guesses:
+            guess = input("Give a proper guess: ")
         if guess in word:
             placeholder = self.update_placeholder(word, placeholder, guess)
         else:
